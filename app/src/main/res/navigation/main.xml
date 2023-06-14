@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    app:startDestination="@id/list">
+
+    <fragment
+        android:id="@+id/list"
+        android:name="com.ntgclarity.currencyconverter.views.currencyList.Currencies"
+        tools:layout="@layout/fragment_currencies">
+        <action
+            android:id="@+id/action_list_to_details"
+            app:destination="@id/details">
+            <argument
+                android:name="details"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/details"
+        android:name="com.ntgclarity.currencyconverter.views.Details.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="details"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
+
