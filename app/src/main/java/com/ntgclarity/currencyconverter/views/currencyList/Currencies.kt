@@ -67,6 +67,7 @@ class Currencies : Fragment() {
                     selectedFrom=binding.fromCurrency.selectedItem.toString()
                     positionFrom=binding.fromCurrency.selectedItemPosition
                     converterRateFrom=currencyCodes.values.elementAt(positionFrom)
+                    viewModel.convertAmount(selectedFrom,selectedTo,amount,converterRate)
 
 
                 }
@@ -86,7 +87,7 @@ class Currencies : Fragment() {
                     positionTo=binding.toCurrency.selectedItemPosition
                     converterRateTo=currencyCodes.values.elementAt(positionTo)
                     converterRate=converterRateTo/converterRateFrom
-                    viewModel.convertAmount(amount.toString().toDouble(),converterRate)
+                    viewModel.convertAmount(selectedFrom,selectedTo,amount.toString().toDouble(),converterRate)
 
                 }
 
@@ -103,10 +104,11 @@ class Currencies : Fragment() {
             binding.toCurrency.setSelection(positionTo)
             binding.fromCurrency.setSelection(positionFrom)
             converterRate=converterRateFrom/converterRateTo
-            viewModel.convertAmount(amount.toString().toDouble(),converterRate)
+            viewModel.convertAmount(selectedFrom,selectedTo,amount.toString().toDouble(),converterRate)
 
         }
 
+        binding.fromAmount.setText("1.0")
         binding.fromAmount.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
@@ -114,7 +116,7 @@ class Currencies : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 amount=s.toString().toDouble();
-                viewModel.convertAmount(amount,converterRate)
+                viewModel.convertAmount(selectedFrom,selectedTo,amount,converterRate)
             }
 
             override fun afterTextChanged(s: Editable?) {

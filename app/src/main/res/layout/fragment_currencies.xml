@@ -50,7 +50,6 @@
                 android:layout_marginStart="5dp"
                 android:inputType="numberDecimal"
                 android:hint="@string/amount"
-                android:text="1"
 
                 />
             <EditText
