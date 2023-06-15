@@ -4,30 +4,73 @@
             name="viewModel"
             type="com.ntgclarity.currencyconverter.views.currencyList.CurrencyViewModel" />
     </data>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:orientation="horizontal">
-    <Spinner
-        android:id="@+id/fromCurrency"
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:layout_height="wrap_content"
-        />
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="30dp"
-        android:padding="5dp"
-        android:background="@drawable/swap"/>
-    <Spinner
-        android:id="@+id/toCurrency"
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:layout_height="wrap_content"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/fromCurrency"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                />
+            <ImageButton
+                android:id="@+id/convertSwap"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:background="@drawable/swap"/>
+            <Spinner
+                android:id="@+id/toCurrency"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                />
 
 
-</LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/fromAmount"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:inputType="numberDecimal"
+                android:hint="@string/amount"
+                android:text="1"
+
+                />
+            <EditText
+                android:id="@+id/toAmount"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:inputType="numberDecimal"
+                android:enabled="false"
+                android:clickable="false"
+                android:hint="@string/converter_amount"
+                android:text="@{viewModel.afterConvertAmount}"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </layout>

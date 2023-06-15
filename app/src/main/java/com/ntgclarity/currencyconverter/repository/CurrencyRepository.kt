@@ -5,8 +5,8 @@ import javax.inject.Inject
 
 
 class CurrencyRepository  @Inject constructor(private val api: AllCurrenciesList) {
-     suspend fun getCurrencyCodes(): Map<String, Double> {
-        val response = api.getCurrenciesList("3f384ae1930cb8af787e779c62a2d859")
+     suspend fun getCurrencyCodes(accessKey:String): Map<String, Double> {
+        val response = api.getCurrenciesList(accessKey)
         return response.rates
     }
 
