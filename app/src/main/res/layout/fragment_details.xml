@@ -8,7 +8,6 @@
         <variable
             name="viewModel"
             type="com.ntgclarity.currencyconverter.views.Details.DetailsViewModel" />
-        />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

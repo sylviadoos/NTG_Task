@@ -25,7 +25,6 @@ class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepo
     val currencyCodes: LiveData<Map<String, Double>> = _currencyCodes
     private var afterConvertText = MutableLiveData<String>()
 
-    val data = repository.users
 
     val afterConvertAmount: LiveData<String>
         get() = afterConvertText

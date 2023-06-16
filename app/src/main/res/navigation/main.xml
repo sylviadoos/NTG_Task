@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_list_to_details"
             app:destination="@id/details">
-            <argument
-                android:name="details"
-                app:argType="string" />
         </action>
     </fragment>
 

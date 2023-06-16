@@ -13,9 +13,8 @@ import com.ntgclarity.currencyconverter.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserDetailsFragment : Fragment() {
+class DetailsFragment : Fragment() {
     private val viewModel: DetailsViewModel by viewModels()
-    private val args: DetailsFragmentArgs by navArgs()
     lateinit var adapter: CurrenciesListAdapter
 
     private var _binding: FragmentDetailsBinding? = null
@@ -43,11 +42,11 @@ class UserDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.data.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-
-
-        }
+//        viewModel.data.observe(viewLifecycleOwner) {
+//            adapter.submitList(it)
+//
+//
+//        }
     }
 
     override fun onDestroyView() {

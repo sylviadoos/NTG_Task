@@ -20,7 +20,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(private val repository: DetailsRepository,
-                                           private val database: CurrenciesDatabase
 ) : ViewModel() {
 
     val data = repository.users
