@@ -18,6 +18,7 @@ import retrofit2.Converter
 import timber.log.Timber
 import java.math.RoundingMode
 import java.sql.Date
+import java.util.Calendar
 import javax.inject.Inject
 import kotlin.math.round
 
@@ -38,11 +39,11 @@ class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepo
         }
     }
 
-    fun convertAmount(fromCurrency:String,toCurrency:String,amount: Double,rate: Double) {
+     fun convertAmount(fromCurrency:String,toCurrency:String,amount: Double,rate: Double) {
         afterConvertText.value= (amount*rate).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toString()
         try {
-            val currencyItem = CurrenciesListItem(fromCurrency,toCurrency)
-            database.currenciesDao.insertAll(currencyItem.asDatabaseModel())
+            val currencyItem = CurrenciesListItem(Date(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_WEEK).toString(),fromCurrency,toCurrency)
+            database.currenciesDao.insertAll(currencyItem.)
         } catch (e: Exception) {
             Timber.w(e)
         }

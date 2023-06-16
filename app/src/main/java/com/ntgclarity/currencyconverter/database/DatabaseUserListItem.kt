@@ -9,7 +9,7 @@ import java.sql.Date
 data class DatabaseCurrenciesListItem constructor(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val dateConvert: Date ,
+    val dateConvert: String ,
     val currencyFrom: String,
     val currencyTo: String
 )

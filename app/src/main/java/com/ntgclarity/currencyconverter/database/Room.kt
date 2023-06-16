@@ -9,10 +9,10 @@ interface CurrenciesDao {
 
     // user List
     @Query("select * from DatabaseCurrenciesListItem")
-    fun getDatabaseUsers(): LiveData<List<CurrenciesListItem>>
+    fun getDatabaseCurrencies(): LiveData<List<CurrenciesListItem>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(users: List<CurrenciesListItem>)
+    @Insert
+    fun insertAll(currenciesListItem: CurrenciesListItem)
 
 
  }
