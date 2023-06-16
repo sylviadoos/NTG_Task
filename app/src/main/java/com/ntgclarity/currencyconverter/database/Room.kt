@@ -8,7 +8,7 @@ import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
 interface CurrenciesDao {
 
     // user List
-    @Query("select * from DatabaseCurrenciesListItem")
+    @Query("select * from DatabaseCurrenciesListItem ")
     fun getDatabaseCurrencies(): LiveData<List<DatabaseCurrenciesListItem>>
 
     @Insert

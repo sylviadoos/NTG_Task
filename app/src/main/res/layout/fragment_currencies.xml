@@ -68,14 +68,15 @@
                 android:text="@{viewModel.afterConvertAmount}"
 
                 />
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="onButtonClicked"
-
-    />
 
         </LinearLayout>
+        <Button
+            android:id="@+id/detailsOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            />
 
     </LinearLayout>
 

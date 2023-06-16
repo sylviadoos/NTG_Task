@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.Details
+package com.ntgclarity.currencyconverter.views.detailsBaseList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,6 @@ import com.ntgclarity.currencyconverter.database.CurrenciesDatabase
 import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
 import com.ntgclarity.currencyconverter.domain.asDatabaseModel
 import com.ntgclarity.currencyconverter.repository.CurrencyRepository
-import com.ntgclarity.currencyconverter.repository.DetailsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,10 +18,23 @@ import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(private val repository: DetailsRepository,
+class DetailsBaseListViewModel @Inject constructor(private val repository: CurrencyRepository,
+                                                   private val database: CurrenciesDatabase
 ) : ViewModel() {
+     val _currencyCodes = MutableLiveData<Map<String, Double>>()
+    val currencyCodes: LiveData<Map<String, Double>> = _currencyCodes
+    private var afterConvertText = MutableLiveData<String>()
 
-    val data = repository.users
+
+    val afterConvertAmount: LiveData<String>
+        get() = afterConvertText
+
+     fun fetchCurrencyCodes() {
+        viewModelScope.launch {
+            val codes = repository.getCurrencyCodes(BuildConfig.API_KEY)
+            _currencyCodes.value = codes
+        }
+    }
 
 
 

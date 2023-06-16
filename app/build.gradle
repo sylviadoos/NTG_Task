@@ -61,6 +61,9 @@ kapt {
 
 dependencies {
 
+    testImplementation 'org.testng:testng:6.9.6'
+    testImplementation 'org.testng:testng:6.9.6'
+    testImplementation 'org.testng:testng:6.9.6'
     def hilt_version = '2.44.2'
     def room_version = '2.4.3'
     def nav_version = '2.5.3'

@@ -13,15 +13,20 @@
             android:id="@+id/action_list_to_details"
             app:destination="@id/details">
         </action>
+        <argument
+            android:name="base"
+            app:argType="string" />
+
     </fragment>
 
     <fragment
         android:id="@+id/details"
-        android:name="com.ntgclarity.currencyconverter.views.Details.DetailsFragment"
+        android:name="com.ntgclarity.currencyconverter.views.detailsPage.DetailsFragment"
         tools:layout="@layout/fragment_details">
         <argument
-            android:name="details"
+            android:name="base"
             app:argType="string" />
+
     </fragment>
 
 </navigation>

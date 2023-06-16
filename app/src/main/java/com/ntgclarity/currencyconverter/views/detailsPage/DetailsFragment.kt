@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.Details
+package com.ntgclarity.currencyconverter.views.detailsPage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,18 @@ import androidx.navigation.fragment.navArgs
 import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private val viewModel: DetailsViewModel by viewModels()
-    lateinit var adapter: CurrenciesListAdapter
+    private val args: DetailsFragmentArgs by navArgs()
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var adapter: CurrenciesListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,11 +46,11 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.data.observe(viewLifecycleOwner) {
-//            adapter.submitList(it)
-//
-//
-//        }
+        viewModel.data.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+
+
+        }
     }
 
     override fun onDestroyView() {

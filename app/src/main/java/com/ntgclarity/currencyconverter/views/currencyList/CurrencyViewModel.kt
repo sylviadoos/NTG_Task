@@ -39,7 +39,8 @@ class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepo
      fun convertAmount(fromCurrency:String,toCurrency:String,amount: Double,rate: Double) {
         afterConvertText.value= (amount*rate).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toString()
         try {
-            val currencyItem = CurrenciesListItem(Date(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_WEEK).toString(),fromCurrency,toCurrency)
+            val currencyItem = CurrenciesListItem(Calendar.getInstance().time.toString(),fromCurrency,toCurrency)
+            if(toCurrency!="")
             database.currenciesDao.insertAll(currencyItem.asDatabaseModel())
         } catch (e: Exception) {
             Timber.w(e)

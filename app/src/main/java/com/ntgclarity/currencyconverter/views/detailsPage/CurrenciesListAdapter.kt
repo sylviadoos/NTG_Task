@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.Details
+package com.ntgclarity.currencyconverter.views.detailsPage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

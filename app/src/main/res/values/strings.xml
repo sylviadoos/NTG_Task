@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="amount">Amount</string>
     <string name="converter_amount">Converter amount</string>
+    <string name="to">To :</string>
+    <string name="from">From :</string>
 </resources>

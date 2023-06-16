@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ntgclarity.currencyconverter.views.Details.DetailsViewModel" />
+            type="com.ntgclarity.currencyconverter.views.detailsPage.DetailsViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -17,7 +17,6 @@ import androidx.navigation.fragment.navArgs
 import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentCurrenciesBinding
 import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
-import com.ntgclarity.currencyconverter.views.Details.DetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.navigation.fragment.findNavController
@@ -129,6 +128,9 @@ class Currencies : Fragment() {
                 // do nothing
             }
         })
+        binding.detailsOpen.setOnClickListener {
+            findNavController().navigate(CurrenciesDirections.actionListToDetails(selectedFrom))
+        }
 
 
 
@@ -144,9 +146,5 @@ class Currencies : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-}
-fun onButtonClicked(view: View) {
-   // findNavController().navigate(CurrenciesDirections.actionListToDetails())
 
 }
