@@ -11,6 +11,9 @@ data class NetworkCurrencyListItem(
 
     )
 
+
+
+
 //fun List<NetworkCurrencyListItem>.asDatabaseModel(): List<DatabaseUserListItem> {
 //    return map {
 //        DatabaseUserListItem(

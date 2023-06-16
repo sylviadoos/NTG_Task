@@ -3,7 +3,6 @@ package com.ntgclarity.currencyconverter.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
-import java.sql.Date
 
 @Entity
 data class DatabaseCurrenciesListItem constructor(
@@ -14,12 +13,23 @@ data class DatabaseCurrenciesListItem constructor(
     val currencyTo: String
 )
 
+fun DatabaseCurrenciesListItem.asDomainModel(): CurrenciesListItem {
+    return CurrenciesListItem(
+            dateConvert = dateConvert,
+            currencyFrom = currencyFrom,
+            currencyTo = currencyTo
+        )
+
+}
+
+
 fun List<DatabaseCurrenciesListItem>.asDomainModel(): List<CurrenciesListItem> {
+
     return map {
         CurrenciesListItem(
             dateConvert = it.dateConvert,
-            currencyFrom = it.currencyFrom,
-            currencyTo = it.currencyTo
+            currencyFrom =  it.currencyFrom,
+            currencyTo =  it.currencyTo
         )
     }
 }

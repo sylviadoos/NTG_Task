@@ -9,10 +9,10 @@ interface CurrenciesDao {
 
     // user List
     @Query("select * from DatabaseCurrenciesListItem")
-    fun getDatabaseCurrencies(): LiveData<List<CurrenciesListItem>>
+    fun getDatabaseCurrencies(): LiveData<List<DatabaseCurrenciesListItem>>
 
     @Insert
-    fun insertAll(currenciesListItem: CurrenciesListItem)
+    fun insertAll(currenciesListItem: DatabaseCurrenciesListItem)
 
 
  }

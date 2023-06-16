@@ -22,7 +22,7 @@ object DatabaseModule {
             appContext,
             CurrenciesDatabase::class.java,
             "Currencies"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
     }
 
     @Provides

@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentCurrenciesBinding
+import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class Currencies : Fragment() {
@@ -126,7 +128,7 @@ class Currencies : Fragment() {
 
 
 
-     //   Log.d("MyTag",currencyCodes.keys.toString())
+      //  Log.d("MyTag",currencyCodes.keys.toString())
 
 
 

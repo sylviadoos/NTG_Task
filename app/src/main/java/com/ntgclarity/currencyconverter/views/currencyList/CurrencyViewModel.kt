@@ -1,7 +1,5 @@
 package com.ntgclarity.currencyconverter.views.currencyList
 
-import android.text.Editable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,25 +7,25 @@ import androidx.lifecycle.viewModelScope
 import com.ntgclarity.currencyconverter.BuildConfig
 import com.ntgclarity.currencyconverter.database.CurrenciesDatabase
 import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
+import com.ntgclarity.currencyconverter.domain.asDatabaseModel
 import com.ntgclarity.currencyconverter.repository.CurrencyRepository
-import dagger.hilt.InstallIn
-import dagger.hilt.android.internal.lifecycle.HiltViewModelMap
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Converter
 import timber.log.Timber
 import java.math.RoundingMode
 import java.sql.Date
 import java.util.Calendar
 import javax.inject.Inject
-import kotlin.math.round
 
 @HiltViewModel
-class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepository) : ViewModel() {
+class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepository,
+                                            private val database: CurrenciesDatabase
+) : ViewModel() {
      val _currencyCodes = MutableLiveData<Map<String, Double>>()
     val currencyCodes: LiveData<Map<String, Double>> = _currencyCodes
     private var afterConvertText = MutableLiveData<String>()
-    private val database: CurrenciesDatabase
+
+    val data = repository.users
 
     val afterConvertAmount: LiveData<String>
         get() = afterConvertText
@@ -43,9 +41,10 @@ class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepo
         afterConvertText.value= (amount*rate).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toString()
         try {
             val currencyItem = CurrenciesListItem(Date(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_WEEK).toString(),fromCurrency,toCurrency)
-            database.currenciesDao.insertAll(currencyItem.)
+            database.currenciesDao.insertAll(currencyItem.asDatabaseModel())
         } catch (e: Exception) {
             Timber.w(e)
         }
     }
+
 }

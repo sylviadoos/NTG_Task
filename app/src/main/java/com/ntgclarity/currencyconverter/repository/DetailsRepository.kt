@@ -10,16 +10,13 @@ import com.ntgclarity.currencyconverter.network.AllCurrenciesList
 import javax.inject.Inject
 
 
-class CurrencyRepository  @Inject constructor(private val api: AllCurrenciesList,    private val database: CurrenciesDatabase
+class DetailsRepository  @Inject constructor(private val database: CurrenciesDatabase
 ) {
 
     val users: LiveData<List<CurrenciesListItem>> =
         Transformations.map(database.currenciesDao.getDatabaseCurrencies()) {
             it.asDomainModel()
         }
-     suspend fun getCurrencyCodes(accessKey:String): Map<String, Double> {
-        val response = api.getCurrenciesList(accessKey)
-        return response.rates
-    }
+
 
 }

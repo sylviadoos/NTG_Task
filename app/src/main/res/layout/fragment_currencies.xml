@@ -3,6 +3,11 @@
         <variable
             name="viewModel"
             type="com.ntgclarity.currencyconverter.views.currencyList.CurrencyViewModel" />
+
+        <variable
+            name="clickListener"
+            type="com.ntgclarity.currencyconverter.views.currencyList.ClickListener" />
+
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +71,10 @@
                 android:text="@{viewModel.afterConvertAmount}"
 
                 />
-
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="@{() -> clickListener.onClick()}"/>
 
         </LinearLayout>
 
