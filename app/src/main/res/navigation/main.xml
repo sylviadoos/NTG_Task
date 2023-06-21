@@ -10,7 +10,7 @@
         android:name="com.ntgclarity.currencyconverter.views.currencyList.Currencies"
         tools:layout="@layout/fragment_currencies">
         <action
-            android:id="@+id/action_list_to_details"
+            android:id="@+id/action_to_details"
             app:destination="@id/details">
         </action>
         <argument
@@ -28,6 +28,22 @@
             app:argType="string" />
 
     </fragment>
+    <fragment
+        android:id="@+id/detailsList"
+        android:name="com.ntgclarity.currencyconverter.views.detailsPage.DetailsList"
+        tools:layout="@layout/fragment_details_list">
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailsBaseList"
+        android:name="com.ntgclarity.currencyconverter.views.detailsPage.DetailsBaseList"
+        tools:layout="@layout/fragment_details_base_list">
+        <argument
+            android:name="base"
+            app:argType="string" />
+
+    </fragment>
+
 
 </navigation>
 

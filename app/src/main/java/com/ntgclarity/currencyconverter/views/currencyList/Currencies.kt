@@ -20,6 +20,8 @@ import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.ntgclarity.currencyconverter.util.NetworkCheck
 
 @AndroidEntryPoint
 class Currencies : Fragment() {
@@ -29,15 +31,15 @@ class Currencies : Fragment() {
     private var _binding: FragmentCurrenciesBinding? = null
     private val binding get() = _binding!!
 
-    private var selectedFrom=""
-    private var selectedTo=""
-    private var positionFrom=0
-    private var positionTo=0
-    private var tempPositionSwap=0
-    private var converterRateFrom=0.0
-    private var converterRateTo=0.0
-    private var converterRate=0.0
-    private var amount=1.0
+    private var selectedFrom = ""
+    private var selectedTo = ""
+    private var positionFrom = 0
+    private var positionTo = 0
+    private var tempPositionSwap = 0
+    private var converterRateFrom = 0.0
+    private var converterRateTo = 0.0
+    private var converterRate = 0.0
+    private var amount = 1.0
 
 
     override fun onCreateView(
@@ -58,87 +60,124 @@ class Currencies : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        viewModel.fetchCurrencyCodes()
-
-
-        viewModel.currencyCodes.observe(viewLifecycleOwner, { currencyCodes ->
-            val fromCurrencyAdapter = ArrayAdapter(binding.root.context, android.R.layout.simple_spinner_item, currencyCodes.keys.toList())
-            fromCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.fromCurrency.adapter = fromCurrencyAdapter
-            binding.fromCurrency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                   // Log.d("selected_data",binding.fromCurrency.selectedItem.toString())
-                    selectedFrom=binding.fromCurrency.selectedItem.toString()
-                    positionFrom=binding.fromCurrency.selectedItemPosition
-                    converterRateFrom=currencyCodes.values.elementAt(positionFrom)
-                    viewModel.convertAmount(selectedFrom,selectedTo,amount,converterRate)
-
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
-            }
-
-            //
-            val toCurrencyAdapter = ArrayAdapter(binding.root.context, android.R.layout.simple_spinner_item, currencyCodes.keys.toList())
-            toCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.toCurrency.adapter = toCurrencyAdapter
-            binding.toCurrency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    selectedTo=binding.toCurrency.selectedItem.toString()
-                    positionTo=binding.toCurrency.selectedItemPosition
-                    converterRateTo=currencyCodes.values.elementAt(positionTo)
-                    converterRate=converterRateTo/converterRateFrom
-                    viewModel.convertAmount(selectedFrom,selectedTo,amount.toString().toDouble(),converterRate)
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
-            }
-        })
-
-        binding.convertSwap.setOnClickListener {
-            tempPositionSwap=positionFrom
-            positionFrom=positionTo
-            positionTo=tempPositionSwap
-            binding.toCurrency.setSelection(positionTo)
-            binding.fromCurrency.setSelection(positionFrom)
-            converterRate=converterRateFrom/converterRateTo
-            viewModel.convertAmount(selectedFrom,selectedTo,amount.toString().toDouble(),converterRate)
-
+        //check internet then call api to get data
+        if (NetworkCheck(binding.root.context).isInternetConnected()) {
+            viewModel.fetchCurrencyCodes()
+            binding.internetConnection.visibility = View.GONE
+            binding.internetConnectionText.visibility = View.GONE
+            binding.convertLayout.visibility = View.VISIBLE
+        } else {
+            binding.internetConnection.visibility = View.VISIBLE
+            binding.internetConnectionText.visibility = View.VISIBLE
+            binding.convertLayout.visibility = View.GONE
         }
 
+        //received data and load it into spinner
+
+        //load data into first spinner Currency
+        viewModel.currencyCodes.observe(viewLifecycleOwner, { currencyCodes ->
+            val fromCurrencyAdapter = ArrayAdapter(
+                binding.root.context,
+                android.R.layout.simple_spinner_item,
+                currencyCodes.keys.toList()
+            )
+            fromCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.fromCurrency.adapter = fromCurrencyAdapter
+            binding.fromCurrency.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        selectedFrom = binding.fromCurrency.selectedItem.toString()
+                        positionFrom = binding.fromCurrency.selectedItemPosition
+                        converterRateFrom = currencyCodes.values.elementAt(positionFrom)
+                        viewModel.convertAmount(selectedFrom, selectedTo, amount, converterRate)
+
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+
+                    }
+                }
+
+            //load data into second spinner Currency that amount convert to it
+            val toCurrencyAdapter = ArrayAdapter(
+                binding.root.context,
+                android.R.layout.simple_spinner_item,
+                currencyCodes.keys.toList()
+            )
+            toCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.toCurrency.adapter = toCurrencyAdapter
+            binding.toCurrency.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        selectedTo = binding.toCurrency.selectedItem.toString()
+                        positionTo = binding.toCurrency.selectedItemPosition
+                        converterRateTo = currencyCodes.values.elementAt(positionTo)
+                        converterRate = converterRateTo / converterRateFrom
+                        viewModel.convertAmount(
+                            selectedFrom,
+                            selectedTo,
+                            amount.toString().toDouble(),
+                            converterRate
+                        )
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+
+                    }
+                }
+        })
+
+        //click on swap button
+        binding.convertSwap.setOnClickListener {
+            tempPositionSwap = positionFrom
+            positionFrom = positionTo
+            positionTo = tempPositionSwap
+            binding.toCurrency.setSelection(positionTo)
+            binding.fromCurrency.setSelection(positionFrom)
+            converterRate = converterRateFrom / converterRateTo
+            viewModel.convertAmount(
+                selectedFrom,
+                selectedTo,
+                amount.toString().toDouble(),
+                converterRate
+            )
+
+        }
+        //default value amount
         binding.fromAmount.setText("1.0")
-        binding.fromAmount.addTextChangedListener(object: TextWatcher {
+
+        //write amount to convert
+        binding.fromAmount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                amount=s.toString().toDouble();
-                viewModel.convertAmount(selectedFrom,selectedTo,amount,converterRate)
+                amount = s.toString().toDouble();
+                viewModel.convertAmount(selectedFrom, selectedTo, amount, converterRate)
             }
 
             override fun afterTextChanged(s: Editable?) {
                 // do nothing
             }
         })
+
+        //click on details button
         binding.detailsOpen.setOnClickListener {
-            findNavController().navigate(CurrenciesDirections.actionListToDetails(selectedFrom))
+            findNavController().navigate(CurrenciesDirections.actionToDetails(selectedFrom))
         }
-
-
-
-      //  Log.d("MyTag",currencyCodes.keys.toString())
-
-
-
-
 
     }
 

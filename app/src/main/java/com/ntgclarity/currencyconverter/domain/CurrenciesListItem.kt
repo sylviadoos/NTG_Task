@@ -1,8 +1,7 @@
 package com.ntgclarity.currencyconverter.domain
 
 import com.ntgclarity.currencyconverter.database.DatabaseCurrenciesListItem
-import com.ntgclarity.currencyconverter.network.model.NetworkCurrencyListItem
-import java.sql.Date
+import java.time.LocalDateTime
 
 data class CurrenciesListItem(
     val dateConvert: String,

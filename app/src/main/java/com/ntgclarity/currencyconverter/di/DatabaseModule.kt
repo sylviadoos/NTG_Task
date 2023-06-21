@@ -2,6 +2,7 @@ package com.ntgclarity.currencyconverter.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.TypeConverters
 
 import com.ntgclarity.currencyconverter.database.CurrenciesDao
 import com.ntgclarity.currencyconverter.database.CurrenciesDatabase
