@@ -48,7 +48,7 @@ class CurrencyViewModel @Inject constructor(private val repository: CurrencyRepo
         afterConvertText.value= (amount*rate).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toString()
         try {
             val currencyItem = CurrenciesListItem(LocalDate.now().toString(),fromCurrency,toCurrency)
-            if(toCurrency!="")
+            if(toCurrency!="" && !fromCurrency.equals(toCurrency))
             database.currenciesDao.insertAll(currencyItem.asDatabaseModel())
         } catch (e: Exception) {
             Timber.w(e)

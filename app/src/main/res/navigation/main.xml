@@ -23,6 +23,7 @@
         android:id="@+id/details"
         android:name="com.ntgclarity.currencyconverter.views.detailsPage.DetailsFragment"
         tools:layout="@layout/fragment_details">
+
         <argument
             android:name="base"
             app:argType="string" />

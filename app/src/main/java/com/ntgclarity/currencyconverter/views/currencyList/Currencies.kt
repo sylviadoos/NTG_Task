@@ -127,7 +127,7 @@ class Currencies : Fragment() {
                         viewModel.convertAmount(
                             selectedFrom,
                             selectedTo,
-                            amount.toString().toDouble(),
+                            amount,
                             converterRate
                         )
 
@@ -150,7 +150,7 @@ class Currencies : Fragment() {
             viewModel.convertAmount(
                 selectedFrom,
                 selectedTo,
-                amount.toString().toDouble(),
+                amount,
                 converterRate
             )
 

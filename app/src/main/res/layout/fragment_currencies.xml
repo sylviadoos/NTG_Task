@@ -16,13 +16,14 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@drawable/load"
-            android:visibility="gone"
-            />
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/internetConnectionText"
+            android:layout_below="@id/internetConnection"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:text="@string/no_internet_connection"/>
 
 
