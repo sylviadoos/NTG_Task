@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentDetailsBinding
-import com.ntgclarity.currencyconverter.util.ViewPagerAdapter
+import com.ntgclarity.currencyconverter.views.adapters.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

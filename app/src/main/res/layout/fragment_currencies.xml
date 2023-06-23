@@ -2,7 +2,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.ntgclarity.currencyconverter.views.currencyList.CurrencyViewModel" />
+            type="com.ntgclarity.currencyconverter.modules.currencyConvert.viewModel.CurrencyViewModel" />
 
 
     </data>
@@ -88,7 +88,7 @@
                 android:enabled="false"
                 android:clickable="false"
                 android:hint="@string/converter_amount"
-                android:text="@{viewModel.afterConvertAmount}"
+                android:text="@{viewModel.amountCurrencyToLiveData}"
 
                 />
 

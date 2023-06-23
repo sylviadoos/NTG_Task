@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.ntgclarity.currencyconverter.domain.CurrenciesListItem" />
+            type="com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem" />
 
     </data>
 

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.TypeConverters
 
-import com.ntgclarity.currencyconverter.database.CurrenciesDao
-import com.ntgclarity.currencyconverter.database.CurrenciesDatabase
+import com.ntgclarity.currencyconverter.data.database.CurrenciesDao
+import com.ntgclarity.currencyconverter.data.database.CurrenciesDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

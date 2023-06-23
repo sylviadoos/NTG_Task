@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.network.model
+package com.ntgclarity.currencyconverter.data.model
 
 data class PopularCurrenciesItem(
     val otherCurrency: String,

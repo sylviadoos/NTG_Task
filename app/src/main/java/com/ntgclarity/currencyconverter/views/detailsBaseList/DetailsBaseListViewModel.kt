@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ntgclarity.currencyconverter.BuildConfig
-import com.ntgclarity.currencyconverter.database.CurrenciesDatabase
-import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
-import com.ntgclarity.currencyconverter.domain.asDatabaseModel
-import com.ntgclarity.currencyconverter.repository.CurrencyRepository
+import com.ntgclarity.currencyconverter.data.database.CurrenciesDatabase
+import com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem
+import com.ntgclarity.currencyconverter.data.database.domain.asDatabaseModel
+import com.ntgclarity.currencyconverter.data.repository.CurrencyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber

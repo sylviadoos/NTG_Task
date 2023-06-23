@@ -1,7 +1,7 @@
 package com.ntgclarity.currencyconverter.di
 
 import com.ntgclarity.currencyconverter.BuildConfig
-import com.ntgclarity.currencyconverter.network.AllCurrenciesList
+import com.ntgclarity.currencyconverter.data.network.CurrenciesApis
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,7 +42,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCurrenciesApiService(retrofit: Retrofit): AllCurrenciesList =
-        retrofit.create(AllCurrenciesList::class.java)
+    fun provideCurrenciesApiService(retrofit: Retrofit): CurrenciesApis =
+        retrofit.create(CurrenciesApis::class.java)
 
 }

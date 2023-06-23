@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.util
+package com.ntgclarity.currencyconverter.views.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

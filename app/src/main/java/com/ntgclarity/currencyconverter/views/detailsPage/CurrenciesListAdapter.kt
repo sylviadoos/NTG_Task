@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ntgclarity.currencyconverter.databinding.ItemCrrencyListBinding
 
-import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
+import com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 

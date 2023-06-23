@@ -1,8 +1,8 @@
-package com.ntgclarity.currencyconverter.database
+package com.ntgclarity.currencyconverter.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
+import com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem
 
 @Dao
 interface CurrenciesDao {

@@ -1,14 +1,10 @@
-package com.ntgclarity.currencyconverter.repository
+package com.ntgclarity.currencyconverter.data.repository
 
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.ntgclarity.currencyconverter.database.CurrenciesDatabase
-import com.ntgclarity.currencyconverter.database.asDomainModel
-import com.ntgclarity.currencyconverter.domain.CurrenciesListItem
-import com.ntgclarity.currencyconverter.network.AllCurrenciesList
+import com.ntgclarity.currencyconverter.data.database.CurrenciesDatabase
+import com.ntgclarity.currencyconverter.data.database.asDomainModel
+import com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem
 import java.time.LocalDate
 import javax.inject.Inject
 
