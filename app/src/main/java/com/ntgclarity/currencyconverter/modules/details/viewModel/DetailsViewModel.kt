@@ -1,9 +1,8 @@
-package com.ntgclarity.currencyconverter.views.detailsPage
+package com.ntgclarity.currencyconverter.modules.details.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ntgclarity.currencyconverter.data.repository.DetailsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

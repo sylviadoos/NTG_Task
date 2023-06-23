@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem" />
+            type="com.ntgclarity.currencyconverter.modules.history.models.HistoryUiModel" />
 
     </data>
 
@@ -25,58 +25,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/personalLayout"/>
 
-        <LinearLayout
-            android:id="@+id/personalLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/Date"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp">
+
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:id="@+id/personalLayout"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@id/Date"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
     android:orientation="horizontal">
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/from"
         android:layout_marginBottom="8dp"
         />
     <TextView
         android:id="@+id/currencyFrom"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{data.currencyFrom}"
+        android:text="@{data.convertData}"
         android:layout_marginBottom="8dp"
         />
 
 </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/to"
-                    android:layout_marginBottom="8dp"
-                    />
-                <TextView
-                    android:id="@+id/currencyTo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{data.currencyTo}"
-                    android:layout_marginBottom="8dp"
-                    />
 
-            </LinearLayout>
-
-        </LinearLayout>
 
 
 

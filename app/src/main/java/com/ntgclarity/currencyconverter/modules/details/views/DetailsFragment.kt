@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.detailsPage
+package com.ntgclarity.currencyconverter.modules.details.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentDetailsBinding
 import com.ntgclarity.currencyconverter.views.adapters.ViewPagerAdapter
+import com.ntgclarity.currencyconverter.views.adapters.CurrenciesListAdapter
+import com.ntgclarity.currencyconverter.modules.popularCurrencies.views.OtherPopularCurrenciesFragment
+import com.ntgclarity.currencyconverter.modules.history.views.HistoricalListFragment
+import com.ntgclarity.currencyconverter.modules.details.viewModel.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -52,8 +56,8 @@ class DetailsFragment : Fragment() {
         // Create a list of fragment titles and IDs
         val fragmentTitles = listOf("Historical list", "Other Currencies")
         val fragmentList = listOf(
-            DetailsList(),
-            DetailsBaseList(),
+            HistoricalListFragment(),
+            OtherPopularCurrenciesFragment(),
         )
         val fragmentIds = listOf(R.id.detailsList, R.id.detailsBaseList)
 

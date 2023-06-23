@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.detailsPage
+package com.ntgclarity.currencyconverter.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,14 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ntgclarity.currencyconverter.databinding.ItemCrrencyListBinding
+import com.ntgclarity.currencyconverter.modules.history.models.HistoryUiModel
 
-import com.ntgclarity.currencyconverter.data.database.domain.CurrenciesListItem
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
 @FragmentScoped
 class CurrenciesListAdapter @Inject constructor() :
-    ListAdapter<CurrenciesListItem, CurrenciesListAdapter.ViewHolder>(CurrenciesListDiffCallback()) {
+    ListAdapter<HistoryUiModel, CurrenciesListAdapter.ViewHolder>(
+        CurrenciesListDiffCallback()
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -27,7 +29,7 @@ class CurrenciesListAdapter @Inject constructor() :
     class ViewHolder private constructor(private val binding: ItemCrrencyListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CurrenciesListItem) {
+        fun bind(item: HistoryUiModel) {
             binding.data = item
             binding.executePendingBindings()
         }
@@ -42,13 +44,13 @@ class CurrenciesListAdapter @Inject constructor() :
     }
 }
 
-class CurrenciesListDiffCallback : DiffUtil.ItemCallback<CurrenciesListItem>() {
+class CurrenciesListDiffCallback : DiffUtil.ItemCallback<HistoryUiModel>() {
 
-    override fun areItemsTheSame(oldItem: CurrenciesListItem, newItem: CurrenciesListItem): Boolean {
-        return oldItem.currencyFrom == newItem.currencyFrom
+    override fun areItemsTheSame(oldItem: HistoryUiModel, newItem: HistoryUiModel): Boolean {
+        return oldItem.convertData == newItem.convertData
     }
 
-    override fun areContentsTheSame(oldItem: CurrenciesListItem, newItem: CurrenciesListItem): Boolean {
+    override fun areContentsTheSame(oldItem: HistoryUiModel, newItem: HistoryUiModel): Boolean {
         return oldItem == newItem
     }
 

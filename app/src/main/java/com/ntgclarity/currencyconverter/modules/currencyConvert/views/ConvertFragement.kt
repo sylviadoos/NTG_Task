@@ -1,8 +1,6 @@
 package com.ntgclarity.currencyconverter.modules.currencyConvert.views
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ntgclarity.currencyconverter.R
-import com.ntgclarity.currencyconverter.databinding.FragmentCurrenciesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation.fragment.findNavController
-import com.ntgclarity.currencyconverter.views.currencyList.CurrenciesDirections
+import com.ntgclarity.currencyconverter.databinding.FragmentConvertBinding
+import com.ntgclarity.currencyconverter.modules.currencyConvert.models.CurrencyUiModel
 import com.ntgclarity.currencyconverter.modules.currencyConvert.viewModel.CurrencyViewModel
 import com.ntgclarity.currencyconverter.modules.currencyConvert.viewStates.CurrenciesListViewState
 
@@ -26,18 +24,14 @@ class ConvertFragement : Fragment() {
     private val viewModel: CurrencyViewModel by viewModels()
 
 
-    private var _binding: FragmentCurrenciesBinding? = null
+    private var _binding: FragmentConvertBinding? = null
     private val binding get() = _binding!!
 
     private var selectedFrom = ""
-    private var selectedTo = ""
     private var positionFrom = 0
     private var positionTo = 0
     private var tempPositionSwap = 0
-    private var converterRateFrom = 0.0
-    private var converterRateTo = 0.0
-    private var converterRate = 0.0
-    private var amount = 1.0
+
 
 
     override fun onCreateView(
@@ -47,7 +41,7 @@ class ConvertFragement : Fragment() {
     ): View {
 
         _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_currencies, container, false
+            inflater, R.layout.fragment_convert, container, false
         )
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -60,25 +54,22 @@ class ConvertFragement : Fragment() {
 
         //check internet then call api to get data
 
-            binding.internetConnection.visibility = View.VISIBLE
-            binding.internetConnectionText.visibility = View.VISIBLE
-            binding.convertLayout.visibility = View.GONE
-
+        viewModel.fetchCurrencyCodes()
 
 //received data and load it into spinner
 
         //load data into first spinner Currency
         viewModel.currenciesViewStateLiveData.observe(viewLifecycleOwner, { currencyCodes ->
-            when(currencyCodes)
-            {
+            when (currencyCodes) {
                 is CurrenciesListViewState.ErrorCurrenciesListViewState ->
-                    Toast.makeText(requireContext(), currencyCodes.message, Toast.LENGTH_SHORT).show()
-                is CurrenciesListViewState.CurrenciesAvailableListViewState ->
-                {
+                    Toast.makeText(requireContext(), currencyCodes.message, Toast.LENGTH_SHORT)
+                        .show()
+
+                is CurrenciesListViewState.CurrenciesAvailableListViewState -> {
                     val fromCurrencyAdapter = ArrayAdapter(
                         binding.root.context,
                         android.R.layout.simple_spinner_item,
-                        currencyCodes.keys.toList()
+                        currencyCodes.list
                     )
                     fromCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     binding.fromCurrency.adapter = fromCurrencyAdapter
@@ -90,10 +81,12 @@ class ConvertFragement : Fragment() {
                                 position: Int,
                                 id: Long
                             ) {
-                                selectedFrom = binding.fromCurrency.selectedItem.toString()
                                 positionFrom = binding.fromCurrency.selectedItemPosition
-                                converterRateFrom = currencyCodes.values.elementAt(positionFrom)
-                                viewModel.convertAmount(selectedFrom, selectedTo, amount, converterRate)
+                                viewModel.selectedFromCurrency = CurrencyUiModel(
+                                    currencyCodes.list.get(positionFrom).name,
+                                    currencyCodes.list.get(positionFrom).rate
+                                )
+                                viewModel.amount = binding.fromAmount.text.toString().toDouble()
 
 
                             }
@@ -107,7 +100,7 @@ class ConvertFragement : Fragment() {
                     val toCurrencyAdapter = ArrayAdapter(
                         binding.root.context,
                         android.R.layout.simple_spinner_item,
-                        currencyCodes.keys.toList()
+                        currencyCodes.list
                     )
                     toCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     binding.toCurrency.adapter = toCurrencyAdapter
@@ -119,11 +112,12 @@ class ConvertFragement : Fragment() {
                                 position: Int,
                                 id: Long
                             ) {
-                                selectedTo = binding.toCurrency.selectedItem.toString()
                                 positionTo = binding.toCurrency.selectedItemPosition
-                                converterRateTo = currencyCodes.values.elementAt(positionTo)
-                                converterRate = converterRateTo / converterRateFrom
-                                viewModel.amount=it.toString().toDouble()
+                                viewModel.selectedToCurrency = CurrencyUiModel(
+                                    currencyCodes.list.get(positionTo).name,
+                                    currencyCodes.list.get(positionTo).rate
+                                )
+                                viewModel.amount = binding.fromAmount.text.toString().toDouble()
 
 
                             }
@@ -134,8 +128,6 @@ class ConvertFragement : Fragment() {
                         }
 
                 }
-
-
 
 
             }
@@ -149,8 +141,7 @@ class ConvertFragement : Fragment() {
             positionTo = tempPositionSwap
             binding.toCurrency.setSelection(positionTo)
             binding.fromCurrency.setSelection(positionFrom)
-            converterRate = converterRateFrom / converterRateTo
-            viewModel.amount=it.toString().toDouble()
+            viewModel.amount = binding.fromAmount.text.toString().toDouble()
 
 
         }
@@ -159,14 +150,15 @@ class ConvertFragement : Fragment() {
 
         //write amount to convert
         binding.fromAmount.doAfterTextChanged {
-            viewModel.amount=it.toString().toDouble()
+            if (it.toString() != "")
+                viewModel.amount = it.toString().toDouble()
 
         }
 
 
         //click on details button
         binding.detailsOpen.setOnClickListener {
-            findNavController().navigate(CurrenciesDirections.actionToDetails(selectedFrom))
+            findNavController().navigate(ConvertFragementDirections.actionToDetails(selectedFrom))
         }
 
     }

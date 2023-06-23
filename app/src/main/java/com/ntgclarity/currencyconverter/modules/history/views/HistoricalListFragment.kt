@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.detailsPage
+package com.ntgclarity.currencyconverter.modules.history.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.ntgclarity.currencyconverter.R
-import com.ntgclarity.currencyconverter.databinding.FragmentDetailsListBinding
+import com.ntgclarity.currencyconverter.databinding.FragmentHistoricalListBinding
+import com.ntgclarity.currencyconverter.views.adapters.CurrenciesListAdapter
+import com.ntgclarity.currencyconverter.modules.history.viewModel.HistoricalListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailsList : Fragment() {
-    private val viewModel: DetailsListViewModel by viewModels()
-   // private val args: DetailsListArgs by navArgs()
+class HistoricalListFragment : Fragment() {
+    private val viewModel: HistoricalListViewModel by viewModels()
 
-    private var _binding: FragmentDetailsListBinding? = null
+    private var _binding: FragmentHistoricalListBinding? = null
     private val binding get() = _binding!!
 
     @Inject
@@ -31,7 +31,7 @@ class DetailsList : Fragment() {
     ): View {
 
         _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_details_list, container, false
+            inflater, R.layout.fragment_historical_list, container, false
         )
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner

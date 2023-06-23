@@ -1,4 +1,4 @@
-package com.ntgclarity.currencyconverter.views.detailsPage
+package com.ntgclarity.currencyconverter.views.adapters
 
 
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ntgclarity.currencyconverter.databinding.ItemCrrencyListBinding
 import com.ntgclarity.currencyconverter.databinding.ItemOthetCurrenciesBinding
 
 import com.ntgclarity.currencyconverter.data.model.PopularCurrenciesItem
@@ -16,7 +15,9 @@ import javax.inject.Inject
 
 @FragmentScoped
 class OtherCurrenciesAdapter @Inject constructor() :
-    ListAdapter<PopularCurrenciesItem, OtherCurrenciesAdapter.ViewHolder>(OtherCurrenciesListDiffCallback()) {
+    ListAdapter<PopularCurrenciesItem, OtherCurrenciesAdapter.ViewHolder>(
+        OtherCurrenciesListDiffCallback()
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)

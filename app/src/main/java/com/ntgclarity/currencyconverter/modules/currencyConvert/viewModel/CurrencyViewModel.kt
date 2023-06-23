@@ -1,6 +1,7 @@
 package com.ntgclarity.currencyconverter.modules.currencyConvert.viewModel
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -75,7 +76,7 @@ class CurrencyViewModel @Inject constructor(
                 currencyFrom = selectedFromCurrency.name,
                 currencyTo = selectedToCurrency.name
             )
-            if (selectedFromCurrency.name != "" && !selectedFromCurrency.name.equals(selectedToCurrency.name))
+            if (selectedToCurrency.name != "" && !selectedFromCurrency.name.equals(selectedToCurrency.name))
                 database.currenciesDao.insertAll(currencyItem)
         } catch (e: Exception) {
             Timber.w(e)

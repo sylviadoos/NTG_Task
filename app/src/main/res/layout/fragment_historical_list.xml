@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ntgclarity.currencyconverter.views.detailsPage.DetailsListViewModel" />
+            type="com.ntgclarity.currencyconverter.modules.history.viewModel.HistoricalListViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
