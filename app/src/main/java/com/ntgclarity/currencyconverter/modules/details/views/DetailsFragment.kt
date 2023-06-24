@@ -57,12 +57,12 @@ class DetailsFragment : Fragment() {
         val fragmentTitles = listOf("Historical list", "Other Currencies")
         val fragmentList = listOf(
             HistoricalListFragment(),
-            OtherPopularCurrenciesFragment(args.base,args.amount,args.baseRate),
+            OtherPopularCurrenciesFragment(args.base, args.amount, args.baseRate),
         )
 //        val fragmentIds = listOf(R.id.history, R.id.popular)
 
         // Set up the ViewPager with a FragmentPagerAdapter
-        binding.viewPager.adapter =  ViewPagerAdapter(this, fragmentList)
+        binding.viewPager.adapter = ViewPagerAdapter(this, fragmentList)
 
 
         // Link the TabLayout and the ViewPager
@@ -70,18 +70,8 @@ class DetailsFragment : Fragment() {
             tab.text = fragmentTitles[position]
         }.attach()
 
-//        // Set the initial tab to display
-//        viewModel.setCurrentFragmentId(R.id.history)
-//        // Observe changes to the current tab and update the ViewPager as needed
-//        viewModel.currentFragmentId.observe(viewLifecycleOwner, { tabId ->
-//            val tabPosition = fragmentIds.indexOf(tabId)
-//           if(tabPosition == -1){
-//                binding.viewPager.currentItem = tabPosition
-//
-//            }
-//        })
-    }
 
+    }
 
 
     override fun onDestroyView() {
