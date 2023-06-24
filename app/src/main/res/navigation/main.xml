@@ -11,7 +11,8 @@
         tools:layout="@layout/fragment_convert">
         <action
             android:id="@+id/action_to_details"
-            app:destination="@id/details"></action>
+            app:destination="@id/details">
+        </action>
         <argument
             android:name="bases"
             app:argType="string" />
@@ -25,16 +26,7 @@
         android:id="@+id/details"
         android:name="com.ntgclarity.currencyconverter.modules.details.views.DetailsFragment"
         tools:layout="@layout/fragment_details">
-        <action
-            android:id="@+id/action_to_history"
-            app:destination="@id/history">
 
-        </action>
-        <action
-            android:id="@+id/action_to_ppular"
-            app:destination="@id/popular">
-
-        </action>
 
         <argument
             android:name="base"
@@ -50,30 +42,7 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/history"
-        android:name="com.ntgclarity.currencyconverter.modules.history.views.HistoricalListFragment"
-        tools:layout="@layout/fragment_historical_list">
 
-    </fragment>
-    <fragment
-        android:id="@+id/popular"
-        android:name="com.ntgclarity.currencyconverter.modules.popularCurrencies.views.OtherPopularCurrenciesFragment"
-        tools:layout="@layout/fragment_other_popular_currencies_list">
-        <argument
-            android:name="base"
-            app:argType="string" />
-
-        <argument
-            android:name="amount"
-            app:argType="string" />
-
-        <argument
-            android:name="baseRate"
-            app:argType="string" />
-
-
-    </fragment>
 
 
 </navigation>

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentOtherPopularCurrenciesListBinding
 import com.ntgclarity.currencyconverter.modules.popularCurrencies.viewModel.OtherPopularCurrenciesListViewModel
@@ -18,10 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OtherPopularCurrenciesFragment() : Fragment() {
+class OtherPopularCurrenciesFragment @Inject constructor(val base: String,val amount: String,val baseRate: String) : Fragment() {
     private val viewModel: OtherPopularCurrenciesListViewModel by viewModels()
-     private val args: OtherPopularCurrenciesFragmentArgs by navArgs()
-    private val symbols : List<String> = listOf("GBP","USD","EUR","CAD","AUD","CHF","BHD","KWD","OMR","KYD","JOD")
+    private var symbols : List<String> = listOf("GBP","USD","EUR","CAD","AUD","CHF","BHD","KWD","OMR","KYD")
     private var _binding: FragmentOtherPopularCurrenciesListBinding? = null
     private val binding get() = _binding!!
 
@@ -52,7 +50,12 @@ class OtherPopularCurrenciesFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.fetchCurrencyCodes(symbols,"EUR",2.00,2.00)
+        if(symbols.contains(base)){
+            symbols  = listOf("GBP","USD","EUR","CAD","AUD","CHF","BHD","KWD","OMR","KYD","JOD")
+
+        }
+
+        viewModel.fetchCurrencyCodes(symbols,base,amount.toDouble(),baseRate.toDouble())
 
         viewModel.currenciesViewStateLiveData.observe(viewLifecycleOwner, { currencyCodes ->
             when (currencyCodes) {

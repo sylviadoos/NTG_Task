@@ -36,7 +36,7 @@ class OtherPopularCurrenciesListViewModel @Inject constructor(
                     _currenciesViewStateLiveData.value =
                         OtherPopularCurrenciesListViewState.OtherPopularCurrenciesAvailableListViewState(
                             codes.data.rates.map {
-                                OtherPopularCurrencyUiModel(it.key, amont*(it.value/baseRate))
+                                OtherPopularCurrencyUiModel(it.key, (amont*(it.value/baseRate)).toString(),base)
                             }.filter { (symbols.contains(it.name)) && (it.name != base)   }.toList()
 
                     )

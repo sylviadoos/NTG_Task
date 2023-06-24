@@ -1,6 +1,10 @@
 package com.ntgclarity.currencyconverter.modules.currencyConvert.views
 
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +15,14 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.ntgclarity.currencyconverter.R
-import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation.fragment.findNavController
+import com.ntgclarity.currencyconverter.R
 import com.ntgclarity.currencyconverter.databinding.FragmentConvertBinding
 import com.ntgclarity.currencyconverter.modules.currencyConvert.models.CurrencyUiModel
 import com.ntgclarity.currencyconverter.modules.currencyConvert.viewModel.CurrencyViewModel
 import com.ntgclarity.currencyconverter.modules.currencyConvert.viewStates.CurrenciesListViewState
+import com.ntgclarity.currencyconverter.networkCheck.ConnectionLiveData
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ConvertFragement : Fragment() {
@@ -31,7 +36,7 @@ class ConvertFragement : Fragment() {
     private var positionFrom = 0
     private var positionTo = 0
     private var tempPositionSwap = 0
-
+    private lateinit var connectionLiveData : ConnectionLiveData
 
 
     override fun onCreateView(
@@ -54,7 +59,28 @@ class ConvertFragement : Fragment() {
 
         //check internet then call api to get data
 
-        viewModel.fetchCurrencyCodes()
+        connectionLiveData = ConnectionLiveData(binding.root.context)
+
+        binding.lifecycleOwner?.let {
+            connectionLiveData.observe(it, { isConnected ->
+
+                if (isConnected){
+                   viewModel.fetchCurrencyCodes()
+                    binding.internetConnection.visibility = View.GONE
+                    binding.internetConnectionText.visibility = View.GONE
+                    binding.convertLayout.visibility = View.VISIBLE
+
+                }else{
+                    binding.internetConnection.visibility = View.VISIBLE
+                    binding.internetConnectionText.visibility = View.VISIBLE
+                    binding.convertLayout.visibility = View.GONE
+
+                }
+
+            })
+        }
+
+
 
 //received data and load it into spinner
 
