@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.ntgclarity.currencyconverter.data.model.PopularCurrenciesItem" />
+            type="com.ntgclarity.currencyconverter.modules.popularCurrencies.models.OtherPopularCurrencyUiModel" />
 
     </data>
 
@@ -20,7 +20,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="16dp"
-            android:text="@{data.otherCurrency}"
+            android:text="@{data.name}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/personalLayout"/>
@@ -49,7 +49,7 @@
                     android:id="@+id/currencyFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{data.rate}"
+                    android:text="@{data.name}"
                     android:layout_marginBottom="8dp"
                     />
 

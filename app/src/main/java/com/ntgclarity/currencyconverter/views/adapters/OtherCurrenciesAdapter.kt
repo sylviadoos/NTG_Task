@@ -1,6 +1,7 @@
 package com.ntgclarity.currencyconverter.views.adapters
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,14 +9,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ntgclarity.currencyconverter.databinding.ItemOthetCurrenciesBinding
 
-import com.ntgclarity.currencyconverter.data.model.PopularCurrenciesItem
+import com.ntgclarity.currencyconverter.modules.popularCurrencies.models.OtherPopularCurrencyUiModel
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
 
 @FragmentScoped
 class OtherCurrenciesAdapter @Inject constructor() :
-    ListAdapter<PopularCurrenciesItem, OtherCurrenciesAdapter.ViewHolder>(
+    ListAdapter<OtherPopularCurrencyUiModel, OtherCurrenciesAdapter.ViewHolder>(
         OtherCurrenciesListDiffCallback()
     ) {
 
@@ -31,7 +32,7 @@ class OtherCurrenciesAdapter @Inject constructor() :
     class ViewHolder private constructor(private val binding: ItemOthetCurrenciesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: PopularCurrenciesItem) {
+        fun bind(item: OtherPopularCurrencyUiModel) {
             binding.data = item
             binding.executePendingBindings()
         }
@@ -46,13 +47,14 @@ class OtherCurrenciesAdapter @Inject constructor() :
     }
 }
 
-class OtherCurrenciesListDiffCallback : DiffUtil.ItemCallback<PopularCurrenciesItem>() {
+class OtherCurrenciesListDiffCallback : DiffUtil.ItemCallback<OtherPopularCurrencyUiModel>() {
 
-    override fun areItemsTheSame(oldItem: PopularCurrenciesItem, newItem: PopularCurrenciesItem): Boolean {
-        return oldItem.otherCurrency == newItem.otherCurrency
+    override fun areItemsTheSame(oldItem: OtherPopularCurrencyUiModel, newItem: OtherPopularCurrencyUiModel): Boolean {
+        return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: PopularCurrenciesItem, newItem: PopularCurrenciesItem): Boolean {
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: OtherPopularCurrencyUiModel, newItem: OtherPopularCurrencyUiModel): Boolean {
         return oldItem == newItem
     }
 

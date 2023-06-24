@@ -13,7 +13,7 @@ class DetailsRepository  @Inject constructor(private val database: CurrenciesDat
 ) {
     val currentDate = LocalDate.now()
 
-    val users: LiveData<List<HistoryUiModel>> =
+    val history: LiveData<List<HistoryUiModel>> =
         Transformations.map(database.currenciesDao.getDatabaseCurrencies(currentDate.minusDays(3).toString(),currentDate.toString())) {
             it
         }

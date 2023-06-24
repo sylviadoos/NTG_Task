@@ -9,7 +9,7 @@ import javax.inject.Inject
 class HistoricalListViewModel @Inject constructor(private val repository: DetailsRepository,
 ) : ViewModel() {
 
-    val data = repository.users
+    val data = repository.history
 
 
 

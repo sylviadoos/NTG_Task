@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     app:startDestination="@id/list">
 
@@ -11,10 +11,12 @@
         tools:layout="@layout/fragment_convert">
         <action
             android:id="@+id/action_to_details"
-            app:destination="@id/details">
-        </action>
+            app:destination="@id/details"></action>
         <argument
-            android:name="base"
+            android:name="bases"
+            app:argType="string" />
+        <argument
+            android:name="amount"
             app:argType="string" />
 
     </fragment>
@@ -23,26 +25,53 @@
         android:id="@+id/details"
         android:name="com.ntgclarity.currencyconverter.modules.details.views.DetailsFragment"
         tools:layout="@layout/fragment_details">
+        <action
+            android:id="@+id/action_to_history"
+            app:destination="@id/history">
+
+        </action>
+        <action
+            android:id="@+id/action_to_ppular"
+            app:destination="@id/popular">
+
+        </action>
 
         <argument
             android:name="base"
             app:argType="string" />
 
+        <argument
+            android:name="amount"
+            app:argType="string" />
+
+        <argument
+            android:name="baseRate"
+            app:argType="string" />
+
 
     </fragment>
     <fragment
-        android:id="@+id/detailsList"
+        android:id="@+id/history"
         android:name="com.ntgclarity.currencyconverter.modules.history.views.HistoricalListFragment"
         tools:layout="@layout/fragment_historical_list">
 
     </fragment>
     <fragment
-        android:id="@+id/detailsBaseList"
+        android:id="@+id/popular"
         android:name="com.ntgclarity.currencyconverter.modules.popularCurrencies.views.OtherPopularCurrenciesFragment"
         tools:layout="@layout/fragment_other_popular_currencies_list">
         <argument
             android:name="base"
             app:argType="string" />
+
+        <argument
+            android:name="amount"
+            app:argType="string" />
+
+        <argument
+            android:name="baseRate"
+            app:argType="string" />
+
 
     </fragment>
 

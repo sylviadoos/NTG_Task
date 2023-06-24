@@ -7,7 +7,8 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class NetworkCurrencyListItem(
     val success: Boolean,
-    val rates: Map<String, Double>,
+    val rates: Map<String, Double>?,
+    val error: ErrorDetails?
 
     )
 

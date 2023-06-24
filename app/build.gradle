@@ -74,7 +74,6 @@ dependencies {
     def nav_version = '2.5.3'
     def coroutines_version = '1.6.4'
     def moshi_version='1.14.0'
-    def glide_version = '4.14.2'
 
 
     implementation 'androidx.core:core-ktx:1.9.0'
@@ -124,9 +123,11 @@ dependencies {
     // Leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
-    // Glide
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    //charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
+
 //    implementation 'androidx.core:core-ktx:1.8.0'
 //    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'

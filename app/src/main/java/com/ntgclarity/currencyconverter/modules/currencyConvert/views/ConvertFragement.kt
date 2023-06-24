@@ -158,7 +158,7 @@ class ConvertFragement : Fragment() {
 
         //click on details button
         binding.detailsOpen.setOnClickListener {
-            findNavController().navigate(ConvertFragementDirections.actionToDetails(selectedFrom))
+            findNavController().navigate(ConvertFragementDirections.actionToDetails(viewModel.selectedFromCurrency.name,viewModel.amount.toString(),viewModel.selectedFromCurrency.rate.toString()))
         }
 
     }

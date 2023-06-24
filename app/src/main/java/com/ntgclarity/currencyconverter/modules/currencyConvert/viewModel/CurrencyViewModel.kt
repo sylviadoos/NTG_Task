@@ -1,7 +1,6 @@
 package com.ntgclarity.currencyconverter.modules.currencyConvert.viewModel
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.ntgclarity.currencyconverter.BuildConfig
 import com.ntgclarity.currencyconverter.data.database.CurrenciesDatabase
 import com.ntgclarity.currencyconverter.data.database.DatabaseCurrenciesListItem
-import com.ntgclarity.currencyconverter.data.repository.CurrencyRepository
+import com.ntgclarity.currencyconverter.data.repository.CurrenciesAvailableRepository
 import com.ntgclarity.currencyconverter.modules.currencyConvert.models.CurrencyUiModel
 import com.ntgclarity.currencyconverter.modules.currencyConvert.viewStates.CurrenciesListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CurrencyViewModel @Inject constructor(
-    private val repository: CurrencyRepository,
+    private val repository: CurrenciesAvailableRepository,
     private val database: CurrenciesDatabase
 ) : ViewModel() {
    private val _currenciesViewStateLiveData = MutableLiveData<CurrenciesListViewState>()
@@ -53,12 +52,18 @@ class CurrencyViewModel @Inject constructor(
         viewModelScope.launch {
             val codes = repository.getCurrencyCodes(BuildConfig.API_KEY)
             if (codes.isSuccessful && codes.data != null) {
+                if(codes.data.success &&  codes.data.rates != null){
                 _currenciesViewStateLiveData.value = CurrenciesListViewState.CurrenciesAvailableListViewState(
-                    codes.data.map {
+                    codes.data.rates.map {
                         CurrencyUiModel(it.key, it.value)
                     }.toList()
                 )
 
+            }else{
+                    _currenciesViewStateLiveData.value =
+                        CurrenciesListViewState.ErrorCurrenciesListViewState(codes.data.error?.info.toString())
+
+                }
             } else {
                 _currenciesViewStateLiveData.value =
                     CurrenciesListViewState.ErrorCurrenciesListViewState(codes.message)

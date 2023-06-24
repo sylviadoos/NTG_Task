@@ -5,15 +5,14 @@ import com.ntgclarity.currencyconverter.data.network.CurrenciesApis
 import com.ntgclarity.currencyconverter.modules.BaseResponseUiModel
 import javax.inject.Inject
 
-
-class CurrencyRepository  @Inject constructor(private val api: CurrenciesApis
+class OtherPopularRepository  @Inject constructor(private val api: CurrenciesApis
 ) {
 
 
-     suspend fun getCurrencyCodes(accessKey:String): BaseResponseUiModel<Map<String, Double>> {
+    suspend fun getCurrencyCodes(accessKey:String): BaseResponseUiModel<NetworkCurrencyListItem> {
 
         val response = api.getCurrenciesList(accessKey)
-        return BaseResponseUiModel(response.isSuccessful,response.message(),response.body()?.rates)
-     }
+        return BaseResponseUiModel(response.isSuccessful,response.message(),response.body())
+    }
 
 }
