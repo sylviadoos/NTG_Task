@@ -8,17 +8,28 @@
     <fragment
         android:id="@+id/list"
         android:name="com.ntgclarity.currencyconverter.modules.currencyConvert.views.ConvertFragement"
-        tools:layout="@layout/fragment_convert">
+        tools:layout="@layout/fragment_convert"
+        app:defaultNavHost="true"
+        >
         <action
             android:id="@+id/action_to_details"
-            app:destination="@id/details">
+            app:destination="@id/details"
+            app:popUpTo="@id/list">
+
+            <argument
+                android:name="base"
+                app:argType="string" />
+
+            <argument
+                android:name="amount"
+                app:argType="string" />
+
+            <argument
+                android:name="baseRate"
+                app:argType="string" />
+
         </action>
-        <argument
-            android:name="bases"
-            app:argType="string" />
-        <argument
-            android:name="amount"
-            app:argType="string" />
+
 
     </fragment>
 

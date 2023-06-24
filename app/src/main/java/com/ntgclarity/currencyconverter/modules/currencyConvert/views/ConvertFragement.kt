@@ -57,6 +57,8 @@ class ConvertFragement : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         //check internet then call api to get data
 
         connectionLiveData = ConnectionLiveData(binding.root.context)
@@ -65,10 +67,10 @@ class ConvertFragement : Fragment() {
             connectionLiveData.observe(it, { isConnected ->
 
                 if (isConnected){
-                   viewModel.fetchCurrencyCodes()
                     binding.internetConnection.visibility = View.GONE
                     binding.internetConnectionText.visibility = View.GONE
                     binding.convertLayout.visibility = View.VISIBLE
+                    viewModel.fetchCurrencyCodes()
 
                 }else{
                     binding.internetConnection.visibility = View.VISIBLE
